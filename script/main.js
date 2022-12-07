@@ -96,7 +96,13 @@ posts.forEach((element, index) => {
     
 });
 
-let likeButton = document.querySelectorAll(".like-button__label");
+const likeButtonEl = document.querySelectorAll(".like-button");
+const likesArray = [];
 
-console.log(likeButton)
+likeButtonEl.forEach((element, index) => {
+    element.addEventListener("click", function(){
+        element.classList.toggle("like-button--liked");
+    })
+})
+
 
