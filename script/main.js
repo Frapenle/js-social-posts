@@ -56,10 +56,9 @@ const posts = [
     }
 ];
 
-const container = document.getElementById("container")
+const container = document.getElementById("container");
 
 posts.forEach((element, index) => {
-    console.log(element.media)
     container.innerHTML += 
     `
     <div class="post">
@@ -94,4 +93,10 @@ posts.forEach((element, index) => {
         </div>
     
     `
+});
+
+const likeButton = document.querySelector(".like-button__label");
+likeButton.addEventListener("click", function(){
+    console.log("click")
+
 })
