@@ -93,10 +93,10 @@ posts.forEach((element, index) => {
         </div>
     
     `
+    
 });
 
-const likeButton = document.querySelector(".like-button__label");
-likeButton.addEventListener("click", function(){
-    console.log("click")
+let likeButton = document.querySelectorAll(".like-button__label");
 
-})
+console.log(likeButton)
+
