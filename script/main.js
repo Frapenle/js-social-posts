@@ -80,7 +80,7 @@ posts.forEach((element, index) => {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${element.id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -105,6 +105,8 @@ likeButtonEl.forEach((element, index) => {
         element.classList.toggle("like-button--liked");
 
         let likesAdd = posts[index].likes;
+        console.log("likesAdd: " + likesAdd)
+        console.log(element)
         if (!likesArray.includes(posts[index].id)){
             likesArray.push(posts[index].id);
             likesAdd++;
