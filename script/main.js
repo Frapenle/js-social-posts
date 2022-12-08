@@ -93,16 +93,26 @@ posts.forEach((element, index) => {
         </div>
     
     `
-    
 });
 
+const likesCounter = document.querySelectorAll(".likes__counter");
 const likeButtonEl = document.querySelectorAll(".like-button");
 const likesArray = [];
 
 likeButtonEl.forEach((element, index) => {
-    element.addEventListener("click", function(){
+    element.addEventListener("click", function(e){
+        e.preventDefault();
         element.classList.toggle("like-button--liked");
-    })
+
+        let likesAdd = posts[index].likes;
+        if (!likesArray.includes(posts[index].id)){
+            likesArray.push(posts[index].id);
+            likesAdd++;
+        } else {
+            likesArray.splice(likesArray.indexOf(posts[index].id), 1);
+            likesAdd;
+        }
+        // !likesArray.includes(posts[index].id) ? likesArray.push(posts[index].id) : likesArray.splice(likesArray.indexOf(posts[index].id), 1);
+        likesCounter[index].innerHTML = `Piace a <b id="like-counter-${element.id}" class="js-likes-counter"> ${likesAdd} </b>persone`;
+    });
 })
-
-
