@@ -55,10 +55,19 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+    
+    const container = document.getElementById("container");
+    
+    posts.forEach((element) => {
+        const newDate = new Date(element.created);
+        const newFormat = (newDate.toLocaleDateString());
+        const newFormatDate = newFormat.replaceAll("/", "-")
+        if (element.author.image == null) {
+            let fallbackImg = element.author.name.match(/\b(\w)/g).join('');
+            element.author.image = fallbackImg;
+            element.author.image.innerHTML += `${fallbackImg}`
+        }
 
-const container = document.getElementById("container");
-
-posts.forEach((element, index) => {
     container.innerHTML += 
     `
     <div class="post">
@@ -69,7 +78,7 @@ posts.forEach((element, index) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${element.author.name}</div>
-                        <div class="post-meta__time">${element.created}</div>
+                        <div class="post-meta__time">${newFormatDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -100,13 +109,14 @@ const likeButtonEl = document.querySelectorAll(".like-button");
 const likesArray = [];
 
 likeButtonEl.forEach((element, index) => {
+    console.log(element, index)
+    console.log(posts[index].likes)
+    
     element.addEventListener("click", function(e){
         e.preventDefault();
         element.classList.toggle("like-button--liked");
-
+        
         let likesAdd = posts[index].likes;
-        console.log("likesAdd: " + likesAdd)
-        console.log(element)
         if (!likesArray.includes(posts[index].id)){
             likesArray.push(posts[index].id);
             likesAdd++;
@@ -114,7 +124,7 @@ likeButtonEl.forEach((element, index) => {
             likesArray.splice(likesArray.indexOf(posts[index].id), 1);
             likesAdd;
         }
-        // !likesArray.includes(posts[index].id) ? likesArray.push(posts[index].id) : likesArray.splice(likesArray.indexOf(posts[index].id), 1);
+
         likesCounter[index].innerHTML = `Piace a <b id="like-counter-${element.id}" class="js-likes-counter"> ${likesAdd} </b>persone`;
     });
 })
