@@ -99,15 +99,16 @@ const posts = [
     
     `
     
-    const changeImg = document.querySelectorAll(".post-meta__icon");
     if (element.author.image == null) {
+        let getImageDiv = document.querySelectorAll(".post-meta__icon");
+        getImageDiv[index].classList.add("fallbackstyle-bg");
+        
         let fallbackImg = element.author.name.match(/\b(\w)/g).join('');
-        changeImg[index].innerHTML = `<img class="profile-pic" src="#" alt=${fallbackImg}>`;
+        getImageDiv[index].innerHTML = `<img class="profile-pic" src="#" alt=${fallbackImg}>`;
     }
 });
 
 const likesCounter = document.querySelectorAll(".likes__counter");
-console.log(likesCounter)
 const likeButtonEl = document.querySelectorAll(".like-button");
 const likesArray = [];
 
