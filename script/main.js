@@ -58,15 +58,11 @@ const posts = [
     
     const container = document.getElementById("container");
     
-    posts.forEach((element) => {
+    
+    posts.forEach((element, index) => {
         const newDate = new Date(element.created);
         const newFormat = (newDate.toLocaleDateString());
-        const newFormatDate = newFormat.replaceAll("/", "-")
-        if (element.author.image == null) {
-            let fallbackImg = element.author.name.match(/\b(\w)/g).join('');
-            element.author.image = fallbackImg;
-            element.author.image.innerHTML += `${fallbackImg}`
-        }
+        const newFormatDate = newFormat.replaceAll("/", "-");
 
     container.innerHTML += 
     `
@@ -102,16 +98,20 @@ const posts = [
         </div>
     
     `
+    
+    const changeImg = document.querySelectorAll(".post-meta__icon");
+    if (element.author.image == null) {
+        let fallbackImg = element.author.name.match(/\b(\w)/g).join('');
+        changeImg[index].innerHTML = `<img class="profile-pic" src="#" alt=${fallbackImg}>`;
+    }
 });
 
 const likesCounter = document.querySelectorAll(".likes__counter");
+console.log(likesCounter)
 const likeButtonEl = document.querySelectorAll(".like-button");
 const likesArray = [];
 
 likeButtonEl.forEach((element, index) => {
-    console.log(element, index)
-    console.log(posts[index].likes)
-    
     element.addEventListener("click", function(e){
         e.preventDefault();
         element.classList.toggle("like-button--liked");
@@ -124,7 +124,7 @@ likeButtonEl.forEach((element, index) => {
             likesArray.splice(likesArray.indexOf(posts[index].id), 1);
             likesAdd;
         }
-
+        
         likesCounter[index].innerHTML = `Piace a <b id="like-counter-${element.id}" class="js-likes-counter"> ${likesAdd} </b>persone`;
     });
 })
