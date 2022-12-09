@@ -104,7 +104,7 @@ const posts = [
         getImageDiv[index].classList.add("fallbackstyle-bg");
         
         let fallbackImg = element.author.name.match(/\b(\w)/g).join('');
-        getImageDiv[index].innerHTML = `<img class="profile-pic" src="#" alt=${fallbackImg}>`;
+        getImageDiv[index].innerHTML = `<div class="profile-pic">${fallbackImg}</div>`;
     }
 });
 
